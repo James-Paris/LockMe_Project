@@ -14,7 +14,7 @@ Sprint Duration: 1 Week
 
 ----
 
-##Sprint 1:
+## Sprint 1:
 		- Build welcome screen
 		- Add app name and dev details
 		- Show main menu
@@ -22,13 +22,13 @@ Sprint Duration: 1 Week
 		- Add option 1 in main menu (files in asc order)
 		- Support closing the application
 	
-##Sprint 2:
+## Sprint 2:
 		- Show option 2 (File operations)
 		- Show file operations menu 
 		- Add option 1 in File Operations (add a file)
 		- Add option 2 in File Operations (delete a file)
 		
-##Sprint 3:
+## Sprint 3:
 		- Add search a file
 		- Back to main menu
 		- Unknown complications
