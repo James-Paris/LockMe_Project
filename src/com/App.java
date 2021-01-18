@@ -18,12 +18,27 @@ public class App {
 	
 	public static void main(String[] args) {
 		
-		//todo: add a grabpath method that allows user to select their path
+		grabPath();
 		showWelcomeScreen();
 		showMainMenu();
 		
 		
 	}
+	
+	private static void grabPath() {
+		System.out.println("\nPlease specify a directory to use, or press [ENTER] to use the default directory: ");
+		String temp = scan.nextLine();
+		if(temp.isEmpty()) {
+			System.out.println("Proceeding with the default directory.");
+		} else {
+			setPath(temp);
+			System.out.println("We will use '" + temp + "' as our working directory.");
+		}
+		
+		
+	}
+	
+	
 	private static void collectionMainMenuOption() {
 		
 		System.out.println("Please choose 1, 2 or 3:");
@@ -58,12 +73,12 @@ public class App {
 	
 	private static void showFilesInAscendingOrder() {
 		System.out.println("------------------");
-        System.out.println("Showing files in ascending order at:" + MY_DIR );
+        //System.out.println("Showing files in ascending order at:" + MY_DIR );
         File f = new File(MY_DIR);
         if(f.exists()) {
-        	System.out.println("THIS PATH EXISTS ALREADY");
+        	//System.out.println("THIS PATH EXISTS ALREADY");
         } else {
-        	System.out.println("WE JUST MADE THE DIR WE JSUT MADDE THE DIR");
+        	//System.out.println("WE JUST MADE THE DIR WE JSUT MADDE THE DIR");
         	f.mkdir();
         }
         File[] files = new File(MY_DIR).listFiles();
