@@ -5,12 +5,16 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /*
  * 
  * 
  */
 public class App {
+	
+	public static boolean matchFlag = false;
 
 	
 	static String MY_DIR = "C:/Users/jmparis/Desktop/HCLTest";
@@ -112,9 +116,10 @@ public class App {
 	
 	private static void fileOpMenuOption() {
 		
-		System.out.println("Please choose 1, 2 or 3:");
+		System.out.println("Please choose 1, 2, 3, 4");
         String option = scan.nextLine();
         String filename = "";
+        int searchResult = 0;
         
         switch (option) {
                 
@@ -129,11 +134,33 @@ public class App {
                 break;
                 
             case "3":
+            	searchResult = searchFiles();
+            	switch(searchResult) {
+	            	
+            		//No match
+	            	case 0:
+	            		System.out.println("\nThere were no matches for that filename.");
+	            		break;
+	            		
+	            	//Similar string
+	            	case 1:
+	            		
+	            		break;
+	            		
+	            	//Perfect match
+	            	case 2:
+	            		System.out.println("\nYes. That files exists within the directory!");
+	            		break;
+            	
+            	}
+            	break;
+                
+            case "4":
             	showMainMenu();
             	break;
                 
             default:
-                System.out.println("Invalid input provided, please choose 1, 2 or 3.");
+                System.out.println("Invalid input provided, please choose 1, 2, 3, or 4.");
         }
         showFileOpMenu();
 		
@@ -144,7 +171,8 @@ public class App {
 		System.out.println("------ File Operations Menu ------");
 		System.out.println("1) Add a file");
 		System.out.println("2) Delete a file");
-		System.out.println("3) Back to main menu");
+		System.out.println("3) Search for a file");
+		System.out.println("4) Back to main menu");
 		System.out.println("----------------------------------");
 		
 		
@@ -189,7 +217,7 @@ public class App {
 	}
 	
 	private static void deleteFile(String filename) {
-File file = new File(MY_DIR + "\\" + filename + ".txt");
+		File file = new File(MY_DIR + "\\" + filename + ".txt");
 		
 		if(file.exists()) {
 			file.delete();
@@ -199,6 +227,59 @@ File file = new File(MY_DIR + "\\" + filename + ".txt");
 			System.out.println("That file doesn't exist.");
 			System.out.println("\n");
 		}
+	}
+	
+	private static void setMatch(boolean b) {
+		App.matchFlag = b;
+	}
+	
+	private static int searchFiles() {
+		
+		System.out.println("\n");
+		System.out.println("Please enter a filename you would like to search for (Include file extension):");
+		String temp = scan.nextLine();
+		boolean matches = false;
+		
+		//Input validation
+		while(temp.isEmpty()) {
+			System.out.println("Error! Please enter a valid filename you would like to search for (Include file extension):");
+			temp = scan.nextLine();
+		}
+		
+		
+		File[] files = new File(MY_DIR).listFiles();
+        for(File file : files) {
+        	 if (!file.isFile()) {
+        		 System.out.println("cont...");
+                 continue;
+             }
+        	if(file.getName().contains(temp)) {
+        		if(file.getName().equalsIgnoreCase(temp)) {
+        			return 2;
+        		}
+        		System.out.println("Similar match found: " + file.getName());
+        		return 1;
+        	}
+        	
+        	matches = Pattern.matches(temp, file.getName());
+        	
+       		if(matches) {       	
+       			System.out.println("It matched!");
+       			if(file.getName().equalsIgnoreCase(temp)) {
+       				System.out.println("IT SUPER MATCHED");
+       				//"perfect match"
+       				return 2;
+        		}
+       			System.out.println("Similar match found: " + file.getName());
+       			return 1;
+        	}
+        }
+		
+		return 0;
+	}
+
+	private static boolean getMatchFlag() {
+		return App.matchFlag;
 	}
 
 	
