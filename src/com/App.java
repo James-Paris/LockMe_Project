@@ -253,7 +253,7 @@ public class App {
         		 System.out.println("cont...");
                  continue;
              }
-        	if(file.getName().contains(temp)) {
+        	if(file.getName().toLowerCase().contains(temp.toLowerCase())) {
         		if(file.getName().equalsIgnoreCase(temp)) {
         			return 2;
         		}
