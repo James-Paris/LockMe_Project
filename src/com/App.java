@@ -9,24 +9,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /*
- * 
- * 
+ * @author: James Paris
+ * @date - 1/18/2021
  */
 public class App {
 	
 	public static boolean matchFlag = false;
 
-	
 	static String MY_DIR = "C:/Users/jmparis/Desktop/HCLTest";
 	static Scanner scan = new Scanner(System.in);
 	
 	public static void main(String[] args) {
-		
 		grabPath();
 		showWelcomeScreen();
 		showMainMenu();
-		
-		
 	}
 	
 	private static void grabPath() {
@@ -38,7 +34,6 @@ public class App {
 			setPath(temp);
 			System.out.println("We will use '" + temp + "' as our working directory.");
 		}
-		
 		
 	}
 	
@@ -250,7 +245,7 @@ public class App {
 		File[] files = new File(MY_DIR).listFiles();
         for(File file : files) {
         	 if (!file.isFile()) {
-        		 System.out.println("cont...");
+        		 //System.out.println("cont...");
                  continue;
              }
         	if(file.getName().toLowerCase().contains(temp.toLowerCase())) {
@@ -264,9 +259,9 @@ public class App {
         	matches = Pattern.matches(temp, file.getName());
         	
        		if(matches) {       	
-       			System.out.println("It matched!");
+       			//System.out.println("It matched!");
        			if(file.getName().equalsIgnoreCase(temp)) {
-       				System.out.println("IT SUPER MATCHED");
+       				//System.out.println("IT SUPER MATCHED");
        				//"perfect match"
        				return 2;
         		}
